@@ -2,7 +2,6 @@
 
 namespace MigrateComfortable;
 
-use Doctrine\DBAL\Migrations\MigrationException;
 use MigrateComfortable\EnvConfigurationLoader\AbstractLoader;
 use MigrateComfortable\EnvConfigurationLoader\CodeIgniterLoader;
 use Symfony\Component\Yaml\Yaml;
@@ -15,6 +14,11 @@ class Configuration {
 	protected $loader;
 	protected $yamlConfig = array();
 	protected $directoryContext = '';
+
+	public static function create()
+	{
+		return new self();
+	}
 
 	public function __construct()
 	{

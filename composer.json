@@ -22,9 +22,12 @@
 	},
 	"bin": [
 		"migrate-to-latest.php",
-		"migrate-to-version.php",
 		"migration-create.php",
 		"migration-doctrine-cli.php",
 		"migrate-init.php"
-	]
+	],
+	"scripts": {
+		"post-install-cmd": "MigrateComfortable\\Configuration::create",
+		"post-update-cmd": "MigrateComfortable\\Configuration::create"
+	}
 }
