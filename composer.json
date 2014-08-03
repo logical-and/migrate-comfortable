@@ -24,7 +24,8 @@
 		"migrate-to-latest.php",
 		"migration-create.php",
 		"migration-doctrine-cli.php",
-		"migrate-init.php"
+		"migrate-init.php",
+		"migrate-init-config.php"
 	],
 	"scripts": {
 		"post-install-cmd": "MigrateComfortable\\Configuration::create",
