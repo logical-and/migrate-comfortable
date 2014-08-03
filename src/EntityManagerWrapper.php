@@ -2,7 +2,7 @@
 
 namespace MigrateComfortable;
 
-use Doctrine\Common\ClassLoader;
+use Composer\Autoload\ClassLoader;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Tools\Setup;
 
@@ -39,7 +39,8 @@ class EntityManagerWrapper {
 		if (!$this->entityManager)
 		{
 			$configuration = $this->getConfiguration();
-			$classLoader = new ClassLoader('Migration', $configuration->getMigrationRootDir());
+			$classLoader = new ClassLoader();
+			$classLoader->set('Migration\\', $configuration->getMigrationRootDir());
 			$classLoader->register();
 
 			$emConfig = Setup::createAnnotationMetadataConfiguration(
