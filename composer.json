@@ -1,0 +1,30 @@
+{
+	"name": "and/migrate-comfortable",
+	"description": "Migrate with comfort",
+	"version": "0.5",
+	"authors": [
+		{
+			"name": "And",
+			"email": "and.webdev@gmail.com"
+		}
+	],
+	"license": "GPL-3.0",
+	"minimum-stability": "beta",
+	"require": {
+		"doctrine/orm": "~2.3@stable",
+		"doctrine/migrations": "1.0.*",
+		"symfony/yaml": "~2.5.2@stable"
+	},
+	"autoload": {
+		"psr-4": {
+			"MigrateComfortable\\": "src/"
+		}
+	},
+	"bin": [
+		"migrate-to-latest.php",
+		"migrate-to-version.php",
+		"migration-create",
+		"migration-doctrine-cli.php",
+		"migrate-init.php"
+	]
+}
