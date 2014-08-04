@@ -45,7 +45,7 @@ class CodeIgniterLoader extends AbstractLoader {
 	protected function completeSettings(array $settings)
 	{
 		$settings = parent::completeSettings($settings);
-		$settings['basepath'] = realpath($settings['basepath']) . '/';
+		$settings['basepath'] = realpath($this->directoryContext . $settings['basepath']) . '/';
 
 		return $settings;
 	}

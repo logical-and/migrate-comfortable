@@ -10,12 +10,14 @@ abstract class AbstractLoader {
 
 	const LOADER_CODEIGNITER = 'codeigniter';
 
+	protected $directoryContext = 'directory/with/migrations.yml';
 	protected $defaultSettings = array();
 	protected $settings = array();
 	protected $configuration = array();
 
 	public function __construct(array $settings)
 	{
+		$this->directoryContext = realpath(dirname(dirname(mc_get_composer_autoload_path()))) . '/';
 		if (!$this->validateSettings($settings))
 		{
 			throw new MigrationException('Wrong settings!');
