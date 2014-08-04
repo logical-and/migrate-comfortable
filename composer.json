@@ -11,13 +11,14 @@
 	"license": "GPL-3.0",
 	"minimum-stability": "beta",
 	"require": {
-		"doctrine/orm": "~2.3@stable",
-		"doctrine/migrations": "1.0.*",
+		"doctrine/orm": "dev-master#2ae8538f9",
+		"doctrine/migrations": "1.0.x-dev",
 		"symfony/yaml": "~2.5.2@stable"
 	},
 	"autoload": {
 		"psr-4": {
-			"MigrateComfortable\\": "src/"
+			"MigrateComfortable\\": "src/",
+			"Doctrine\\": "patched/"
 		}
 	},
 	"bin": [
