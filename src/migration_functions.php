@@ -270,9 +270,11 @@ function _executeMigrationObject($objectName, EntityManagerWrapper $emw, array $
 
 	// Fix
 	$object->addOption('no-interaction', NULL, InputOption::VALUE_OPTIONAL, 'Execute the migration without a warning message which you need to interact with', FALSE);
+	$input = _getInput($options, $object->getDefinition());
+	if (!empty($options['--no-interaction']) OR !empty($options['-n'])) $input->setInteractive(FALSE);
 
 	// Use call_user_func, such as IDE look in Command class, and execute method has protected access
-	call_user_func(array($object, 'execute'), _getInput($options, $object->getDefinition()), _getOutput($printResult));
+	call_user_func(array($object, 'execute'), $input, _getOutput($printResult));
 }
 
 function _getMigrationsConfiguration(EntityManagerWrapper $emw)
