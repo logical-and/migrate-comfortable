@@ -49,7 +49,8 @@ function generateMigration(EntityManagerWrapper $emw, $printResult = TRUE)
 		storeDatabaseToMapping($emw, FALSE);
 		_executeMigrationObject('VersionCommand', $emw, array(
 			'--add'   => TRUE,
-			'version' => _getMigrationsConfiguration($emw)->getLatestVersion()
+			'version' => _getMigrationsConfiguration($emw)->getLatestVersion(),
+			'--no-interaction' => TRUE
 		), FALSE);
 	}
 }
