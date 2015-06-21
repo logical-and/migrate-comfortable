@@ -85,6 +85,11 @@ class Configuration {
 		return $this->getEnvConfigLoader()->getConfigurationValue('databaseHost');
 	}
 
+	public function getDatabaseCharset()
+	{
+		return $this->getEnvConfigLoader()->getConfigurationValue('databaseCharset');
+	}
+
 	public function getEntitiesNS()
 	{
 		return dirname($this->yamlConfig['migrations_namespace']) . '\\Mapping';

@@ -51,6 +51,7 @@ class EntityManagerWrapper {
 				'user'     => $configuration->getDatabaseUser(),
 				'password' => $configuration->getDatabasePassword(),
 				'dbname'   => $configuration->getDatabaseName(),
+				'charset'  => !$configuration->getDatabaseCharset() ?: $configuration->getDatabaseCharset(),
 			), $emConfig);
 
 			$this->entityManager = $em;

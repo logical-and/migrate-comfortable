@@ -28,7 +28,8 @@ class CodeIgniterLoader extends AbstractLoader {
 			'databaseName'     => $loaded[ 'database' ],
 			'databaseUser'     => $loaded[ 'username' ],
 			'databasePassword' => $loaded[ 'password' ],
-			'databaseHost'     => $loaded[ 'hostname' ]
+			'databaseHost'     => $loaded[ 'hostname' ],
+			'databaseCharset'  => $loaded[ 'char_set' ]
 		);
 
 		return $configuration;
