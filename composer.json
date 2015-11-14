@@ -11,8 +11,8 @@
 	"license": "GPL-3.0",
 	"minimum-stability": "beta",
 	"require": {
-		"doctrine/orm": "dev-master#2ae8538f9",
-		"doctrine/migrations": "dev-master#058a4635",
+		"doctrine/orm": "2.3.x-dev#2ae8538f9",
+		"doctrine/migrations": "1.1.x-dev#058a4635",
 		"symfony/yaml": "~2.5.2@stable"
 	},
 	"autoload": {
