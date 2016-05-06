@@ -1,7 +1,7 @@
 name: Doctrine Sandbox Migrations
 table_name: version
-migrations_namespace: Migration\Migrations
-migrations_directory: migrations/Migration/Migrations
+migrations_directory: migrations
+migrations_namespace: Migration
 
 environment_type: ~
 

@@ -106,12 +106,16 @@ class Configuration {
 
 	public function getEntitiesNS()
 	{
-		return dirname($this->yamlConfig['migrations_namespace']) . '\\Mapping';
+		return (
+			false !== strpos((string) $this->yamlConfig['migrations_namespace'], '\\') ?
+				(dirname($this->yamlConfig['migrations_namespace']) . '\\') :
+				'Migration\\'
+		) . 'Mapping';
 	}
 
 	public function getEntitiesDir()
 	{
-		return $this->ensureDirExists($this->getMigrationRootDir() . str_replace('\\', '/', $this->getEntitiesNS()));
+		return $this->ensureDirExists($this->getMigrationRootDir() . $this->getEntitiesNS());
 	}
 
 	public function getMigrationsDir()
