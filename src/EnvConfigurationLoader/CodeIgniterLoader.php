@@ -6,6 +6,7 @@ use MigrateComfortable\MigrationException;
 
 class CodeIgniterLoader extends AbstractLoader {
 
+	const TYPE = 'codeigniter';
 
 	protected $defaultSettings = array(
 		'basepath'       => 'basepath/directory',

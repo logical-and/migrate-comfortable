@@ -36,7 +36,7 @@ class Configuration {
 	{
 		switch ($type)
 		{
-			case AbstractLoader::LOADER_CODEIGNITER:
+			case CodeIgniterLoader::TYPE:
 				$this->loader = new CodeIgniterLoader($args);
 				break;
 
