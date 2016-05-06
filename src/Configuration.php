@@ -121,7 +121,14 @@ class Configuration {
 
 	public function getMigrationRootDir()
 	{
-		return $this->ensureDirExists($this->directoryContext . dirname(dirname($this->yamlConfig['migrations_directory'])) . '/');
+		return $this->ensureDirExists(
+			$this->directoryContext .
+			(false !== strpos($this->yamlConfig['migrations_directory'], '/') ?
+				substr($this->yamlConfig['migrations_directory'], 0, strpos($this->yamlConfig['migrations_directory'], '/')) :
+				$this->yamlConfig['migrations_directory']
+			) .
+			'/'
+		);
 	}
 
 	public function isDevMode()

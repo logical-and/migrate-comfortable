@@ -15,7 +15,6 @@ use Doctrine\DBAL\Migrations\Configuration\Configuration;
 use Doctrine\DBAL\Migrations\Tools\Console\Command\DiffCommand;
 use Doctrine\DBAL\Migrations\Version;
 use Doctrine\DBAL\Tools\Console\Helper\ConnectionHelper;
-use Doctrine\DBAL\Version as DbalVersion;
 use Doctrine\ORM\Mapping\Driver\DatabaseDriver;
 use Doctrine\ORM\Tools\Console\Helper\EntityManagerHelper;
 use Doctrine\ORM\Tools\DisconnectedClassMetadataFactory;
@@ -25,7 +24,6 @@ use Doctrine\ORM\Tools\Export\Driver\AnnotationExporter;
 use Doctrine\ORM\Tools\SchemaTool;
 use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Helper\DialogHelper;
 use Symfony\Component\Console\Helper\HelperSet;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Input\InputDefinition;
@@ -234,9 +232,14 @@ function _getApplication(EntityManagerWrapper $emw)
 	$application = new Application();
 	$application->setHelperSet(new HelperSet(array(
 		'db'     => new ConnectionHelper($emw->getEntityManager()->getConnection()),
-		'em'     => new EntityManagerHelper($emw->getEntityManager()),
-		'dialog' => new DialogHelper()
+		'em'     => new EntityManagerHelper($emw->getEntityManager())
 	)));
+
+	if(class_exists('\Symfony\Component\Console\Helper\QuestionHelper')) {
+		$application->getHelperSet()->set(new \Symfony\Component\Console\Helper\QuestionHelper(), 'question');
+	} else {
+		$application->getHelperSet()->set(new \Symfony\Component\Console\Helper\DialogHelper(), 'dialog');
+	}
 
 	return $application;
 }

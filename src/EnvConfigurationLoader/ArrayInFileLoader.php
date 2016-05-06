@@ -84,7 +84,7 @@ class ArrayInFileLoader extends AbstractLoader
         // Use default values if needed
         foreach ($this->settings[ 'default' ] as $key => $value) {
             if (!isset($configuration[ $key ])) {
-                $configuration = $value;
+                $configuration[ $key ] = $value;
             }
         }
 
