@@ -207,6 +207,7 @@ function getMigrationsVersions(EntityManagerWrapper $emw)
 
 function getCurrentVersion(EntityManagerWrapper $emw)
 {
+	goToRightDirectory($emw);
 	return _getMigrationsConfiguration($emw)->getCurrentVersion();
 }
 

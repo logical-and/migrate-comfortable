@@ -30,7 +30,7 @@ class ArrayInFileLoader extends AbstractLoader
             $this->confException('file', 'cannot be empty!');
         } elseif (!is_file($this->directoryContext . $settings[ 'file' ] . '.php')) {
             $this->confException('file',
-                sprintf('"%" is not exists!', $this->directoryContext . $settings[ 'file' ] . '.php'));
+                sprintf('"%s" is not exists!', $this->directoryContext . $settings[ 'file' ] . '.php'));
         }
 
         if (empty($settings[ 'mapping' ])) {

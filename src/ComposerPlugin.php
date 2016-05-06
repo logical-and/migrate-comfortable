@@ -26,8 +26,8 @@ class ComposerPlugin implements PluginInterface, EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return [
-            'post-package-install' => 'createMigrationsConfiguration',
-            'post-package-update' => 'createMigrationsConfiguration'
+            'post-install-cmd' => 'createMigrationsConfiguration',
+            'post-update-cmd' => 'createMigrationsConfiguration'
         ];
     }
 

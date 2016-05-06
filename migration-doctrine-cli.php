@@ -6,7 +6,11 @@
 $helperSet = require __DIR__ . '/src/bootstrap/bootstrap_cli_helperset.php';
 
 // Migration helpers
-$helperSet->set(new \Symfony\Component\Console\Helper\DialogHelper(), 'dialog');
+if(class_exists('\Symfony\Component\Console\Helper\QuestionHelper')) {
+	$helperSet->set(new \Symfony\Component\Console\Helper\QuestionHelper(), 'question');
+} else {
+	$helperSet->set(new \Symfony\Component\Console\Helper\DialogHelper(), 'dialog');
+}
 
 Doctrine\ORM\Tools\Console\ConsoleRunner::run($helperSet, array(
 	// Migrations Commands
