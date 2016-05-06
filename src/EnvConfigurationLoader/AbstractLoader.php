@@ -15,9 +15,9 @@ abstract class AbstractLoader {
 	protected $settings = array();
 	protected $configuration = array();
 
-	public function __construct(array $settings)
+	public function __construct(array $settings, $directoryContext)
 	{
-		$this->directoryContext = realpath(dirname(dirname(mc_get_composer_autoload_path()))) . '/';
+		$this->directoryContext = $directoryContext;
 		if (!$this->validateSettings($settings))
 		{
 			throw new MigrationException('Wrong settings!');

@@ -5,13 +5,15 @@ if (!function_exists('mc_get_composer_autoload_path'))
 	function mc_get_composer_autoload_path()
 	{
 		foreach (array(
-			'../../vendor/autoload.php',
-			'../../../../../vendor/autoload.php',
-			'../../../../../../vendor/autoload.php',
-		) as $autoloadFile)
+			'../composer/installed.json',
+			'../../../../composer/installed.json',
+			'../../../../../composer/installed.json',
+		) as $installedList)
 		{
-			$autoloadFile = __DIR__ . '/' . $autoloadFile;
-			if (is_file($autoloadFile)) return $autoloadFile;
+			$installedList = __DIR__ . '/' . $installedList;
+			if (is_file($installedList)) {
+				return realpath(dirname(dirname($installedList)) . '/autoload.php');
+			}
 		}
 
 		throw new Exception('Unable to find composer autoload file');
@@ -19,4 +21,3 @@ if (!function_exists('mc_get_composer_autoload_path'))
 }
 
 require_once mc_get_composer_autoload_path();
-

@@ -23,7 +23,16 @@ class Configuration {
 
 	public function __construct()
 	{
-		$this->directoryContext = realpath(dirname(dirname(mc_get_composer_autoload_path()))) . '/';
+		// Plugin way
+		if (is_file(__DIR__ . '/composer-json-path.txt') and
+			($data = file_get_contents(__DIR__ . '/composer-json-path.txt'))) {
+
+			$this->directoryContext = dirname($data) . '/';
+		}
+		// Common way
+		else {
+			$this->directoryContext = realpath(dirname(dirname(mc_get_composer_autoload_path()))) . '/';
+		}
 
 		// Go outside the vendor's dir
 		$config = $this->directoryContext . 'migrations.yml';
@@ -37,11 +46,11 @@ class Configuration {
 		switch ($type)
 		{
 			case CodeIgniterLoader::TYPE:
-				$this->loader = new CodeIgniterLoader($args);
+				$this->loader = new CodeIgniterLoader($args, $this->directoryContext);
 				break;
 
 			case ArrayInFileLoader::TYPE:
-				$this->loader = new ArrayInFileLoader($args);
+				$this->loader = new ArrayInFileLoader($args, $this->directoryContext);
 				break;
 
 			default:
@@ -144,4 +153,3 @@ class Configuration {
 		return $dir;
 	}
 }
- 
