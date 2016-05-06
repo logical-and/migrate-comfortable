@@ -3,6 +3,7 @@
 namespace MigrateComfortable;
 
 use MigrateComfortable\EnvConfigurationLoader\AbstractLoader;
+use MigrateComfortable\EnvConfigurationLoader\ArrayInFileLoader;
 use MigrateComfortable\EnvConfigurationLoader\CodeIgniterLoader;
 use Symfony\Component\Yaml\Yaml;
 
@@ -37,6 +38,10 @@ class Configuration {
 		{
 			case AbstractLoader::LOADER_CODEIGNITER:
 				$this->loader = new CodeIgniterLoader($args);
+				break;
+
+			case ArrayInFileLoader::TYPE:
+				$this->loader = new ArrayInFileLoader($args);
 				break;
 
 			default:

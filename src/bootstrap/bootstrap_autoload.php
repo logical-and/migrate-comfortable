@@ -1,6 +1,6 @@
 <?php
 
-if (!function_exists('v'))
+if (!function_exists('mc_get_composer_autoload_path'))
 {
 	function mc_get_composer_autoload_path()
 	{

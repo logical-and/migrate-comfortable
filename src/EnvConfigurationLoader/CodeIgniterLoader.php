@@ -6,6 +6,7 @@ use MigrateComfortable\MigrationException;
 
 class CodeIgniterLoader extends AbstractLoader {
 
+
 	protected $defaultSettings = array(
 		'basepath'       => 'basepath/directory',
 		'section'        => 'admin',

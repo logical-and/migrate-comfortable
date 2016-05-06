@@ -9,3 +9,18 @@ codeigniter:
     basepath: ~
     section: ~
     database_group: ~
+
+array_in_file:
+    file: app/config
+    variable: ~
+    mapping:
+        driver: databaseDriver
+        database: databaseName
+        user: databaseUser
+        password: databasePassword
+        host: databaseHost
+        charset: databaseCharset
+    default:
+        databaseDriver: mysql
+        databaseHost: localhost
+        databaseCharset: utf8
