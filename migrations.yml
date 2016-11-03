@@ -13,13 +13,13 @@ codeigniter:
 array_in_file:
     file: app/config
     variable: ~
-    mapping:
-        driver: databaseDriver
-        database: databaseName
-        user: databaseUser
-        password: databasePassword
-        host: databaseHost
-        charset: databaseCharset
+    data_mapping:
+        databaseDriver: driver
+        databaseName: database
+        databaseUser: user
+        databasePassword: password
+        databaseHost: host
+        databaseCharset: charset
     default:
         databaseDriver: pdo_mysql
         databaseHost: localhost

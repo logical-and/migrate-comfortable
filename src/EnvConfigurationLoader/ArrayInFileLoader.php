@@ -7,9 +7,23 @@ class ArrayInFileLoader extends AbstractLoader
     const TYPE = 'array_in_file';
 
     protected $defaultSettings = [
-        'file'     => '',
-        'variable' => '',
-        'mapping'  => [
+        'file'         => '',
+        'variable'     => '',
+        'data_mapping' => [
+            'databaseDriver'   => 'driver',
+            'databaseName'     => 'database',
+            'databaseUser'     => 'user',
+            'databasePassword' => 'password',
+            'databaseHost'     => 'host',
+            'databaseCharset'  => 'charset'
+        ],
+        'default'      => [
+            'databaseDriver'  => 'mysql',
+            'databaseHost'    => 'localhost',
+            'databaseCharset' => 'utf8'
+        ],
+        // old
+        'mapping'      => [
             'driver'   => 'databaseDriver',
             'database' => 'databaseName',
             'user'     => 'databaseUser',
@@ -17,11 +31,6 @@ class ArrayInFileLoader extends AbstractLoader
             'host'     => 'databaseHost',
             'charset'  => 'databaseCharset'
         ],
-        'default'  => [
-            'databaseDriver'  => 'mysql',
-            'databaseHost'    => 'localhost',
-            'databaseCharset' => 'utf8'
-        ]
     ];
 
     protected function validateSettings(array $settings)
@@ -33,8 +42,8 @@ class ArrayInFileLoader extends AbstractLoader
                 sprintf('"%s" is not exists!', $this->directoryContext . $settings[ 'file' ] . '.php'));
         }
 
-        if (empty($settings[ 'mapping' ])) {
-            $this->confException('mapping', 'cannot be empty!');
+        if (empty($settings[ 'data_mapping' ]) and empty($settings[ 'mapping' ])) {
+            $this->confException('data_mapping', 'cannot be empty!');
         }
 
         return true;
@@ -74,9 +83,16 @@ class ArrayInFileLoader extends AbstractLoader
             $this->confException('variable', 'loaded variable is not array');
         }
 
-        // Get values from configuration
+        // Get values from configuration: old style
         foreach ($this->settings[ 'mapping' ] as $from => $to) {
             if (isset($loadedConfiguration[ $from ])) {
+                $configuration[ $to ] = $loadedConfiguration[ $from ];
+            }
+        }
+
+        // Get values from configuration: old style
+        foreach ($this->settings[ 'data_mapping' ] as $to => $from) {
+            if ($from and isset($loadedConfiguration[ $from ])) {
                 $configuration[ $to ] = $loadedConfiguration[ $from ];
             }
         }

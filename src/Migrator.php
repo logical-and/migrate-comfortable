@@ -15,6 +15,8 @@ use Doctrine\ORM\Tools\Export\ClassMetadataExporter;
 use Doctrine\ORM\Tools\Export\Driver\AnnotationExporter;
 use Doctrine\ORM\Tools\SchemaTool;
 use InvalidArgumentException;
+use MigrateComfortable\EnvConfigurationLoader\ArrayInFileLoader;
+use MigrateComfortable\EnvConfigurationLoader\CodeIgniterLoader;
 use MigrateComfortable\Wrapper\DiffCommandWrapper;
 use MigrateComfortable\Wrapper\EntityManagerWrapper;
 use MigrateComfortable\Wrapper\MigrationOutputWrapper;
@@ -266,8 +268,8 @@ class Migrator
                     array_diff_key($config, array_flip([
                         // allowed keys
                         'environment_type',
-                        'codeigniter',
-                        'array_in_file'
+                        CodeIgniterLoader::TYPE,
+                        ArrayInFileLoader::TYPE
                     ])))
             );
 
