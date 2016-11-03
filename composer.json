@@ -12,6 +12,7 @@
 	"license": "GPL-3.0",
 	"minimum-stability": "beta",
 	"require": {
+		"php": ">=5.4",
 		"doctrine/orm": "~2.5",
 		"doctrine/migrations": "~1.4",
 		"symfony/yaml": "~2.5",

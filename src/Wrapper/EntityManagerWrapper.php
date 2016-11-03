@@ -1,10 +1,11 @@
 <?php
 
-namespace MigrateComfortable;
+namespace MigrateComfortable\Wrapper;
 
 use Composer\Autoload\ClassLoader;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Tools\Setup;
+use MigrateComfortable\Configuration;
 
 class EntityManagerWrapper {
 

@@ -1,5 +1,4 @@
 <?php
-use MigrateComfortable\EntityManagerWrapper;
 
 /**
  * Migrate to selected version
@@ -7,28 +6,26 @@ use MigrateComfortable\EntityManagerWrapper;
  * @author And <and.webdev@gmail.com>
  */
 
-/**
- * @var EntityManagerWrapper $emw
- */
-$emw = require __DIR__ . '/src/bootstrap/bootstrap_orm.php';
-require __DIR__ . '/src/migration_functions.php';
+require_once __DIR__ . '/src/bootstrap.php';
 
-$migrated = FALSE;
+$migrator = new MigrateComfortable\Migrator();
+
+$migrated = false;
 
 if (isset($_POST[ 'version' ]))
 {
-	MigrateComfortable\migrateTo($_POST[ 'version' ], $emw, TRUE);
-	$migrated = TRUE;
+	$migrator->migrateToCommand($_POST[ 'version' ]);
+	$migrated = true;
 };
 
-$currentVersion = MigrateComfortable\getCurrentVersion($emw);
+$currentVersion = $migrator->getCurrentVersion();
 ?>
 <? if ($migrated): ?>
 	<br><br>
 <? endif ?>
 <form action="" method="POST">
 	<select name="version">
-		<? foreach (array_reverse(MigrateComfortable\getMigrationsVersions($emw)) as $version): ?>
+		<? foreach (array_reverse($migrator->getMigrationsVersions()) as $version): ?>
 			<? if ($version == $currentVersion): ?>
 				<option value="<?= $version ?>" selected="selected"><?= $version ?></option>
 			<? else: ?>
@@ -36,5 +33,5 @@ $currentVersion = MigrateComfortable\getCurrentVersion($emw);
 			<? endif ?>
 		<? endforeach ?>
 	</select>
-	<button>Мигрировать на выбранную версию</button>
+	<button>Migrate to selected version</button>
 </form>

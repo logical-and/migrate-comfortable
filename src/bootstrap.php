@@ -5,9 +5,9 @@ if (!function_exists('mc_get_composer_autoload_path'))
 	function mc_get_composer_autoload_path()
 	{
 		foreach (array(
-			'../../vendor/composer/installed.json',
+			'../vendor/composer/installed.json',
+			'../../../composer/installed.json',
 			'../../../../composer/installed.json',
-			'../../../../../composer/installed.json',
 		) as $installedList)
 		{
 			$installedList = __DIR__ . '/' . $installedList;

@@ -7,7 +7,7 @@ use MigrateComfortable\EnvConfigurationLoader\ArrayInFileLoader;
 use MigrateComfortable\EnvConfigurationLoader\CodeIgniterLoader;
 use Symfony\Component\Yaml\Yaml;
 
-require_once __DIR__ . '/bootstrap/bootstrap_autoload.php';
+require_once __DIR__ . '/bootstrap.php';
 
 class Configuration {
 
