@@ -12,6 +12,8 @@ require_once __DIR__ . '/bootstrap/bootstrap_autoload.php';
 
 use Doctrine\Common\Proxy\Exception\InvalidArgumentException;
 use Doctrine\DBAL\Migrations\Configuration\Configuration;
+use Doctrine\DBAL\Migrations\Configuration\JsonConfiguration;
+use Doctrine\DBAL\Migrations\Tools\Console\Command\AbstractCommand;
 use Doctrine\DBAL\Migrations\Tools\Console\Command\DiffCommand;
 use Doctrine\DBAL\Migrations\Version;
 use Doctrine\DBAL\Tools\Console\Helper\ConnectionHelper;
@@ -262,9 +264,10 @@ function _getMigrationObject($objectName, EntityManagerWrapper $emw)
 	// Complete the name
 	if (FALSE === strpos($objectName, '\\')) $objectName = 'Doctrine\DBAL\Migrations\Tools\Console\Command\\' . $objectName;
 
-	/** @var Command $object */
-	$object = new $objectName($objectName);
+	/** @var Command|AbstractCommand $object */
+	$object = new $objectName();
 	$object->setApplication(_getApplication($emw));
+	$object->setMigrationConfiguration(_getMigrationsConfiguration($emw));
 
 	return $object;
 }
@@ -284,16 +287,23 @@ function _executeMigrationObject($objectName, EntityManagerWrapper $emw, array $
 
 function _getMigrationsConfiguration(EntityManagerWrapper $emw)
 {
-	$object = _getMigrationObject('StatusCommand', $emw);
-	$refl   = new \ReflectionObject($object);
-	$method = $refl->getMethod('getMigrationConfiguration');
-	$method->setAccessible(TRUE);
-	/** @var Configuration $conf */
-	$conf = $method->invoke($object, _getInput(array(), $object->getDefinition()), _getOutput(FALSE));
-//	$conf = $object->getMigrationConfiguration(_getInput(array(), $object->getDefinition()), _getOutput(FALSE));
-	$method->setAccessible(FALSE);
+	$configuration = new JsonConfiguration($emw->getEntityManager()->getConnection());
 
-	return $conf;
+	// Create tmp file
+	$tmpFile = tempnam(sys_get_temp_dir(), 'mc-');
+	$config = $emw->getConfiguration()->getRawConfig();
+	file_put_contents($tmpFile, json_encode(
+		array_diff_key($config, array_flip([
+			'environment_type', 'codeigniter', 'array_in_file'
+		])))
+	);
+
+	$configuration->load($tmpFile);
+
+	// Remove tmp file
+	unlink($tmpFile);
+
+	return $configuration;
 }
 
 /**

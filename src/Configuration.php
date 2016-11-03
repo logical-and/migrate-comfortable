@@ -145,6 +145,11 @@ class Configuration {
 		return $this->directoryContext;
 	}
 
+	public function getRawConfig()
+	{
+		return $this->yamlConfig;
+	}
+
 	// --- Internal methods
 
 	protected function getEnvConfigLoader()

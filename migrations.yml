@@ -21,6 +21,6 @@ array_in_file:
         host: databaseHost
         charset: databaseCharset
     default:
-        databaseDriver: mysql
+        databaseDriver: pdo_mysql
         databaseHost: localhost
         databaseCharset: utf8

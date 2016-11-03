@@ -2,7 +2,7 @@
 	"name": "and/migrate-comfortable",
 	"description": "Migrate with comfort",
 	"type": "composer-plugin",
-	"version": "0.5",
+	"version": "0.9",
 	"authors": [
 		{
 			"name": "And",
@@ -12,15 +12,14 @@
 	"license": "GPL-3.0",
 	"minimum-stability": "beta",
 	"require": {
-		"doctrine/orm": "2.5.x-dev#2ae8538f9",
-		"doctrine/migrations": "1.2.x-dev#058a4635",
-		"symfony/yaml": "~2.5.2@stable",
+		"doctrine/orm": "~2.5",
+		"doctrine/migrations": "~1.4",
+		"symfony/yaml": "~2.5",
 		"composer-plugin-api": "^1.0"
 	},
 	"autoload": {
 		"psr-4": {
-			"MigrateComfortable\\": "src/",
-			"Doctrine\\": "patched/"
+			"MigrateComfortable\\": "src/"
 		}
 	},
 	"bin": [
