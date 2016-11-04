@@ -6,6 +6,7 @@ use MigrateComfortable\EnvConfigurationLoader\AbstractLoader;
 use MigrateComfortable\EnvConfigurationLoader\ArrayInFileLoader;
 use MigrateComfortable\EnvConfigurationLoader\CodeIgniterLoader;
 use Symfony\Component\Yaml\Yaml;
+use SymlinkDetective;
 
 require_once __DIR__ . '/bootstrap.php';
 
@@ -23,20 +24,14 @@ class Configuration {
 
 	public function __construct()
 	{
-		// Plugin way
-		if (is_file(__DIR__ . '/composer-json-path.txt') and
-			($data = file_get_contents(__DIR__ . '/composer-json-path.txt'))) {
-
-			$this->directoryContext = dirname($data) . '/';
-		}
-		// Common way
-		else {
-			$this->directoryContext = realpath(dirname(dirname(mc_get_composer_autoload_path()))) . '/';
-		}
+		$this->directoryContext = SymlinkDetective::detectPath(mc_get_composer_autoload_path(), '/../../') . '/';
 
 		// Go outside the vendor's dir
 		$config = $this->directoryContext . 'migrations.yml';
-		if (!file_exists($config)) copy(__DIR__ . '/../migrations.yml', $config);
+
+		if (!file_exists($config)) {
+			copy(__DIR__ . '/../migrations.yml', $config);
+		}
 
 		$this->yamlConfig = Yaml::parse($config, TRUE);
 	}

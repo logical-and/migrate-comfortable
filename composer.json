@@ -16,7 +16,8 @@
 		"doctrine/orm": "~2.5",
 		"doctrine/migrations": "~1.4",
 		"symfony/yaml": "~2.5",
-		"composer-plugin-api": "^1.0"
+		"composer-plugin-api": "^1.0",
+		"and/symlink-detective": "~0.5"
 	},
 	"autoload": {
 		"psr-4": {
