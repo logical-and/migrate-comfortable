@@ -159,7 +159,14 @@ class Configuration {
 
 	protected function ensureDirExists($dir)
 	{
-		if (!is_dir($dir)) mkdir($dir, 0777, TRUE);
+	    // Convert namespace slashes to proper ones
+	    if ('/' == DIRECTORY_SEPARATOR) {
+	        $dir = str_replace('\\', '/', $dir);
+        }
+
+		if (!is_dir($dir)) {
+		    mkdir($dir, 0777, TRUE);
+        }
 
 		return $dir;
 	}

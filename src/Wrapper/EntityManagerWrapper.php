@@ -49,6 +49,7 @@ class EntityManagerWrapper {
 			);
 			$em     = EntityManager::create(array(
 				'driver'   => $configuration->getDatabaseDriver(),
+				'host'     => $configuration->getDatabaseHost(),
 				'user'     => $configuration->getDatabaseUser(),
 				'password' => $configuration->getDatabasePassword(),
 				'dbname'   => $configuration->getDatabaseName(),

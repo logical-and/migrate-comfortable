@@ -2,7 +2,7 @@
 	"name": "and/migrate-comfortable",
 	"description": "Migrate with comfort",
 	"type": "composer-plugin",
-	"version": "0.9",
+	"version": "0.9.1",
 	"authors": [
 		{
 			"name": "And",
